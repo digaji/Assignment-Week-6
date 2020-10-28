@@ -19,7 +19,8 @@ armin = {
 
 students = [eren, mikasa, armin]
 for student in students:
-    print(student.get("name"), student.get("homework"), student.get("quizzes"), student.get("tests"), sep="\n") # Prints all values in new lines
+    for key in student: # Iterate through each key in each student
+        print(student.get(key)) # Prints each value in new lines
 
 def average(numbers):
     total = sum(numbers)
@@ -55,7 +56,7 @@ def get_class_average(students):
         students (list): List containing all of the student' information in dictionary form
 
     Returns:
-        (int): Average of the 3 student' average
+        (int): Average of the 3 students' average
     """
     results = []
     for student in students:
