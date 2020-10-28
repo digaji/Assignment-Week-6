@@ -23,16 +23,30 @@ for student in students:
         print(student.get(key)) # Prints each value in new lines
 
 def average(numbers):
+    """
+    Args:
+        numbers (list): List of numbers
+
+    Returns:
+        (int): Average from the list of numbers
+    """
     total = sum(numbers)
     total = float(total)
     total = total / len(numbers)
     return total
 
 def get_average(student):
+    """
+    Args:
+        student (dict): Dictionary with keys "homework", "quizzes", and "tests"
+
+    Returns:
+        (float): Sum of all 3 variables with weight
+    """
     homework = average(student["homework"])
     quizzes = average(student["quizzes"])
     tests = average(student["tests"])
-    return homework * 0.1 + quizzes * 0.3 + tests * 0.6 # Sum of all 3 variables with weight
+    return homework * 0.1 + quizzes * 0.3 + tests * 0.6
 
 def get_letter_grade(score):
     if score >= 90:
