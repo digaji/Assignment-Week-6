@@ -2,29 +2,21 @@ ash = "audino bagon baltoy banette bidoof braviary bronzor carracosta charmeleon
 
 pokeList = ash.split(" ")
 
-pokeDict = {}
-for name in pokeList:
-    if name[0] not in pokeDict:
-        pokeDict[name[0]] = [name]
-    else:
-        pokeDict[name[0]].append(name)
-
-
 def longest_seq(sequence):
-    longest_chain = []
 
-    def recursion(chain):
-        nonlocal longest_chain
-        if len(chain) > len(longest_chain):
-            longest_chain = chain
-        if chain[-1][-1] in pokeDict:
-            for name in pokeDict[chain[-1][-1]]:
-                if name not in chain:
-                    recursion(chain + [name])
+    def recursion(pokemonS, previous_pokemon=None):
+        # Creates an empty sequence which is valid
+        yield []
+        # Creates a new list of pokemons that will not consider the previous pokemon
+        pokemonS = [pokemon for pokemon in pokemonS if pokemon != previous_pokemon] # Initialized as a generator
+        for pokemon in pokemonS:
+            # Checks if the pokemon going through the function is not a previous pokemon
+            if not previous_pokemon or pokemon.startswith(previous_pokemon[-1]):
+                for edge in recursion(pokemonS, previous_pokemon=pokemon):
+                    yield [pokemon] + edge
 
-    for pokemon in sequence:
-        recursion([pokemon])
-    return longest_chain
-
+    return max(recursion(sequence), key=len) # Returns the longest list
 
 print(longest_seq(pokeList))
+
+# Much slower than JC's dictionary method
