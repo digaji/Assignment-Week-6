@@ -20,3 +20,4 @@ def longest_seq(sequence):
 print(longest_seq(pokeList))
 
 # Much slower than JC's dictionary method
+# Takes 50 seconds to run
